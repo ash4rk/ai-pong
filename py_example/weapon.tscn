@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="Sprite" type="Sprite"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 15, 9 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )

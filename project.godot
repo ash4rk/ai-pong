@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="AI_Pong"
+run/main_scene="res://py_example/main.tscn"
 config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[ "res://pythonscript.gdnlib" ]
 
 [gui]
 
