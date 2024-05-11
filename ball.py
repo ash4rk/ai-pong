@@ -17,5 +17,8 @@ class Ball(KinematicBody2D):
 		if collision:
 			reflection = self.direction - Vector2(2.0, 2.0) * self.direction.dot(collision.normal) * collision.normal
 			self.direction = reflection
-			self.speed *= 1.05
-			self.speed = min(self.speed, MAX_SPEED)
+
+			if collision.collider.is_in_group("panels"):
+				self.speed *= 1.05
+				self.speed = min(self.speed, MAX_SPEED)
+				collision.collider.register_bounce()
