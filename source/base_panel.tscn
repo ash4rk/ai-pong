@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="BasePanel" type="StaticBody2D"]
+[node name="BasePanel" type="StaticBody2D" groups=["panels"]]
 script = ExtResource( 2 )
 height = 64.0
 
