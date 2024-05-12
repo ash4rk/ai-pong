@@ -1,6 +1,7 @@
 from godot import exposed, export, Vector2, KinematicBody2D, NodePath
 
 MAX_SPEED = 5000.0
+START_SPEED = 10.0
 START_DIRECTION = Vector2(1.0, 0.4)
 
 @exposed
@@ -8,11 +9,15 @@ class Ball(KinematicBody2D):
 
 	start_pos_node_path = export(NodePath)
 	direction = START_DIRECTION
-	speed = 10.0
+	speed = START_SPEED
 
 	def _ready(self):
-		self.global_position = self.get_node(self.start_pos_node_path).global_position
+		self.reset()
 
+	def reset(self):
+		self.global_position = self.get_node(self.start_pos_node_path).global_position
+		self.direction = START_DIRECTION
+		self.speed = START_SPEED
 
 	def _process(self, delta):
 		velocity = self.direction * self.speed

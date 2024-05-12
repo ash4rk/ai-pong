@@ -19,7 +19,7 @@ class PlayerOneControl(Node):
 	def _ready(self):
 		self.panel = PANEL_SCENE.instance()
 		self.add_child(self.panel)
-		self.panel.global_position = self.get_node(self.start_pos_node_path).global_position
+		self.reset()
 
 	def _physics_process(self, delta):
 		if Input.is_action_just_pressed("p1_move_up"):
@@ -32,3 +32,6 @@ class PlayerOneControl(Node):
 		if (Input.is_action_just_released("p1_move_down")
 			and not Input.is_action_pressed("p1_move_up")):
 			self.panel.stop()
+
+	def reset(self):
+		self.panel.global_position = self.get_node(self.start_pos_node_path).global_position
