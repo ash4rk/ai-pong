@@ -31,8 +31,8 @@ class Training(Node):
 	def _on_anim_finished(self, anim_name):
 		if str(anim_name) == "game_over":
 			self.ball.reset()
-			self.player_1.reset()
 			self.player_1.panel.stop()
+			self.player_1.reset()
 			self.score = 0
 		elif str(anim_name) == "prepare":
 			pass

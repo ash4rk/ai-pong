@@ -1,13 +1,14 @@
-from godot import exposed, export, Input, Node, NodePath, ResourceLoader
+from godot import Input, Node2D, ResourceLoader, export, exposed
 
 PANEL_SCENE = ResourceLoader.load("res://source/base_panel.tscn")
 
+
 @exposed
-class PlayerOneControl(Node):
+class PlayerOneControl(Node2D):
+	def __init__(self, panel):
+		self.panel = panel
 
-	start_pos_node_path = export(NodePath)
-
-	@export(Node)
+	@export(Node2D)
 	@property
 	def panel(self):
 		return self._panel
@@ -26,12 +27,14 @@ class PlayerOneControl(Node):
 			self.panel.move_up()
 		if Input.is_action_just_pressed("p1_move_down"):
 			self.panel.move_down()
-		if (Input.is_action_just_released("p1_move_up")
-			and not Input.is_action_pressed("p1_move_down")):
+		if Input.is_action_just_released("p1_move_up") and not Input.is_action_pressed(
+			"p1_move_down"
+		):
 			self.panel.stop()
-		if (Input.is_action_just_released("p1_move_down")
-			and not Input.is_action_pressed("p1_move_up")):
+		if Input.is_action_just_released(
+			"p1_move_down"
+		) and not Input.is_action_pressed("p1_move_up"):
 			self.panel.stop()
 
 	def reset(self):
-		self.panel.global_position = self.get_node(self.start_pos_node_path).global_position
+		self.panel.global_position = self.global_position
