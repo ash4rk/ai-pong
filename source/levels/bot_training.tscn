@@ -1,0 +1,201 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://source/gates.py" type="Script" id=1]
+[ext_resource path="res://source/ball.py" type="Script" id=2]
+[ext_resource path="res://source/levels/training.py" type="Script" id=3]
+[ext_resource path="res://source/ui.py" type="Script" id=4]
+[ext_resource path="res://bot/bot.py" type="Script" id=5]
+[ext_resource path="res://source/base_panel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30, 300 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 512, 30 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.7351
+
+[sub_resource type="Animation" id=4]
+resource_name = "game_over"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Game Over!" ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "go"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Go!" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameOverLabel:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ), Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "prepare"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "3", "2", "1" ]
+}
+
+[node name="Training" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Game" type="Node" parent="."]
+
+[node name="Bot" type="Node2D" parent="."]
+position = Vector2( 82, 294 )
+script = ExtResource( 5 )
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="Right" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 1024, 300 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+shape = SubResource( 2 )
+
+[node name="Top" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 512, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Top"]
+shape = SubResource( 3 )
+
+[node name="Bottom" type="StaticBody2D" parent="Boundaries"]
+position = Vector2( 512, 600 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom"]
+shape = SubResource( 3 )
+
+[node name="Ball" type="KinematicBody2D" parent="."]
+position = Vector2( 516, 296 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+modulate = Color( 0.219608, 1, 0, 1 )
+shape = SubResource( 1 )
+
+[node name="StaticPanel" parent="." instance=ExtResource( 6 )]
+position = Vector2( 960, 300 )
+height = 256.0
+
+[node name="PlayerGates" type="StaticBody2D" parent="." groups=["gates"]]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -15, 300 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGates"]
+shape = SubResource( 2 )
+
+[node name="UI_Layer" type="CanvasLayer" parent="."]
+script = ExtResource( 4 )
+
+[node name="ScoreLabel" type="Label" parent="UI_Layer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -85.0
+margin_top = 37.0
+margin_right = -23.0
+margin_bottom = 51.0
+rect_scale = Vector2( 3, 3 )
+text = "Score: %s"
+align = 1
+valign = 1
+
+[node name="GameOverLabel" type="Label" parent="UI_Layer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -30.0
+margin_top = 131.0
+margin_right = 47.0
+margin_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 40, 7 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI_Layer"]
+anims/game_over = SubResource( 4 )
+anims/go = SubResource( 5 )
+anims/prepare = SubResource( 6 )
