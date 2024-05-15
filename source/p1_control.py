@@ -27,13 +27,9 @@ class PlayerOneControl(Node2D):
 			self.panel.move_up()
 		if Input.is_action_just_pressed("p1_move_down"):
 			self.panel.move_down()
-		if Input.is_action_just_released("p1_move_up") and not Input.is_action_pressed(
-			"p1_move_down"
-		):
+		if Input.is_action_just_released("p1_move_up") and not Input.is_action_pressed("p1_move_down"):
 			self.panel.stop()
-		if Input.is_action_just_released(
-			"p1_move_down"
-		) and not Input.is_action_pressed("p1_move_up"):
+		if Input.is_action_just_released("p1_move_down") and not Input.is_action_pressed("p1_move_up"):
 			self.panel.stop()
 
 	def reset(self):

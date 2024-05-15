@@ -7,15 +7,15 @@ START_DIRECTION = Vector2(1.0, 0.4)
 @exposed
 class Ball(KinematicBody2D):
 
-	start_pos_node_path = export(NodePath)
 	direction = START_DIRECTION
 	speed = START_SPEED
 
 	def _ready(self):
+		self.start_pos = self.global_position
 		self.reset()
 
 	def reset(self):
-		self.global_position = self.get_node(self.start_pos_node_path).global_position
+		self.global_position = self.start_pos
 		self.direction = START_DIRECTION
 		self.speed = START_SPEED
 
