@@ -3,6 +3,7 @@ from godot import exposed, export, Vector2, KinematicBody2D, NodePath
 MAX_SPEED = 5000.0
 START_SPEED = 10.0
 START_DIRECTION = Vector2(1.0, 0.4)
+DEFAULT_ACCELERATION_FACTOR = 1.0
 
 @exposed
 class Ball(KinematicBody2D):
@@ -17,8 +18,17 @@ class Ball(KinematicBody2D):
 	def speed(self, value):
 		self._speed = float(str(value))
 
+	@property
+	def acceleration_factor(self):
+		return self._acceleration_factor
+
+	@acceleration_factor.setter
+	def acceleration_factor(self, value):
+		self._acceleration_factor = float(str(value))
+
 	def _ready(self):
 		self.start_pos = self.global_position
+		self.acceleration_factor = DEFAULT_ACCELERATION_FACTOR
 		self.reset()
 
 	def reset(self):
@@ -34,7 +44,7 @@ class Ball(KinematicBody2D):
 			self.direction = reflection
 
 			if collision.collider.is_in_group("panels"):
-				self.speed *= 1.05
+				self.speed *= self.acceleration_factor
 				self.speed = min(self.speed, MAX_SPEED)
 				collision.collider.call("emit_signal", "bounce")
 

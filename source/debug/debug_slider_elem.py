@@ -23,27 +23,30 @@ class DebugElem(HBoxContainer):
 			return
 
 		self.value_label = self.get_node("ValueLabel")
-		self.value_text_edit = self.get_node("ValueLineEdit")
-		self.change_btn = self.get_node("ChangeButton")
+		self.value_line_edit = self.get_node("ValueLineEdit")
+		self.slider = self.get_node("HSlider")
 		self.node_to_track = self.get_node(self.path_to_node)
 
-		self.change_btn.connect("pressed", self, "_on_change_btn_pressed")
+		self.slider.connect("value_changed", self, "_on_value_changed")
+		self.value_line_edit.connect("text_entered", self, "_on_value_changed")
+		self._set_initial_value()
 
-	def _process(self, delta):
+	def _set_initial_value(self):
 		if not hasattr(self, "node_to_track"):
 			return
 
 		value = self.node_to_track.get(self.property_to_track)
 
 		if isinstance(value, float):
-			self.value_label.text = ("%.2f" % value)
+			self.value_line_edit.text = ("%.2f" % value)
 		elif isinstance(value, int):
-			self.value_label.text = ("%d" % value)
+			self.value_line_edit.text = ("%d" % value)
 		else:
 			pass
 			# for debug purpuses
 			# print("unhandled type for %s, value: %s with type: %s" % (self.name, value, type(value)))
 
-
-	def _on_change_btn_pressed(self):
-		 self.node_to_track.set(self.property_to_track, str(self.value_text_edit.text))
+	def _on_value_changed(self, value):
+	 self.node_to_track.set(self.property_to_track, str(self.slider.value))
+	 self.slider.value = value
+	 self.value_line_edit.value = value
