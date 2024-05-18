@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/debug/debug_elem.py" type="Script" id=1]
+
+[node name="DebugElem" type="HBoxContainer"]
+margin_right = 386.0
+margin_bottom = 20.0
+script = ExtResource( 1 )
+
+[node name="NameLabel" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 157.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "visible_name"
+
+[node name="ValueLabel" type="Label" parent="."]
+margin_left = 161.0
+margin_top = 5.0
+margin_right = 241.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 80, 0 )
+text = "100.0"
+
+[node name="ValueLineEdit" type="LineEdit" parent="."]
+margin_left = 245.0
+margin_right = 325.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+text = "50.0"
+
+[node name="ChangeButton" type="Button" parent="."]
+margin_left = 329.0
+margin_right = 386.0
+margin_bottom = 24.0
+text = "change"
