@@ -10,12 +10,12 @@ class Training(Node):
 
 	@score.setter
 	def score(self, value):
-		self._score = value
+		self._score = int(str(value))
 		self.ui.update(value)
 
 	def _ready(self):
 		self.get_node("PlayerGates").connect("goal", self, "_on_goal")
-		self.player_1 = self.get_node("PlayerOneControl")
+		self.player_1 = self.get_node("Bot")
 		self.player_1.panel.connect("bounce", self, "_on_bounce")
 		self.ball = self.get_node("Ball")
 		self.ui = self.get_node("UI_Layer")

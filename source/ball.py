@@ -8,7 +8,14 @@ START_DIRECTION = Vector2(1.0, 0.4)
 class Ball(KinematicBody2D):
 
 	direction = START_DIRECTION
-	speed = START_SPEED
+
+	@property
+	def speed(self):
+		return self._speed
+
+	@speed.setter
+	def speed(self, value):
+		self._speed = float(str(value))
 
 	def _ready(self):
 		self.start_pos = self.global_position

@@ -16,7 +16,6 @@ class BotPlayer(PlayerOneControl):
 		super()._ready()
 
 	def _physics_process(self, delta):
-
 		if self.panel.global_position.y >= self.lower_bound:
 			self.panel.move_up()
 
