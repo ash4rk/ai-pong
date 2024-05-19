@@ -27,9 +27,11 @@ class Ball(KinematicBody2D):
 		self._acceleration_factor = float(str(value))
 
 	def _ready(self):
+		print("ball _ready")
 		self.start_pos = self.global_position
 		self.acceleration_factor = DEFAULT_ACCELERATION_FACTOR
 		self.reset()
+		self.get_node("../Game").set("ball", self)
 
 	def reset(self):
 		self.global_position = self.start_pos

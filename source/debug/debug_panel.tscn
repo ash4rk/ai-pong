@@ -1,4 +1,7 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/debug/debug_slider_elem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/debug/debug_elem.tscn" type="PackedScene" id=4]
 
 [node name="DebugPanel" type="Control"]
 margin_right = 396.0
@@ -16,3 +19,30 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
+
+[node name="GameSpeed" parent="VBoxContainer" instance=ExtResource( 3 )]
+margin_bottom = 24.0
+value_name = "Game:speed"
+property_to_track = "game_speed"
+path_to_node = NodePath("../../../../Game")
+
+[node name="GameScore" parent="VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 28.0
+margin_bottom = 52.0
+value_name = "Game:score"
+property_to_track = "score"
+path_to_node = NodePath("../../../../Game")
+
+[node name="BallSpeed" parent="VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 56.0
+margin_bottom = 80.0
+value_name = "Ball:Speed"
+property_to_track = "speed"
+path_to_node = NodePath("../../../../Ball")
+
+[node name="BallAccelFactor" parent="VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 84.0
+margin_bottom = 108.0
+value_name = "Ball:acceleration_factor"
+property_to_track = "acceleration_factor"
+path_to_node = NodePath("../../../../Ball")

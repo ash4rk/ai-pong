@@ -13,7 +13,8 @@ class Training(Node):
 	@score.setter
 	def score(self, value):
 		self._score = int(str(value))
-		self.ui.update(value)
+		if hasattr(self, "ui"):
+			self.ui.update(value)
 
 	@property
 	def game_speed(self):
@@ -24,34 +25,58 @@ class Training(Node):
 		print("game_speed changed!")
 		self._game_speed = float(str(value))
 
-	def _ready(self):
-		self.game_speed = INIT_GAME_SPEED
-		self.get_node("PlayerGates").connect("goal", self, "_on_goal")
-		self.player_1 = self.get_node("Player")
-		self.player_1.panel.connect("bounce", self, "_on_bounce")
-		self.ball = self.get_node("Ball")
-		self.ui = self.get_node("UI_Layer")
-		self.ui.anim_player.connect("animation_finished", self, "_on_anim_finished")
+	@property
+	def player(self):
+		return self._player
+
+	@player.setter
+	def player(self, value):
+		print("player changed!")
+		value.panel.connect("bounce", self, "_on_bounce")
+		self._player = value
+
+	@property
+	def ball(self):
+		return self._ball
+
+	@ball.setter
+	def ball(self, value):
+		print("ball changed!")
+		self._ball = value
+
+	@property
+	def ui(self):
+		return self._ui
+
+	@ui.setter
+	def ui(self, value):
+		print("ui changed!")
+		value.get("anim_player").connect("animation_finished", self, "_on_anim_finished")
+		self._ui = value
 		self.score = 0
 
-	def _on_goal(self):
+	def _ready(self):
+		print("Training _ready")
+		self.game_speed = INIT_GAME_SPEED
+
+	def on_goal(self):
 		self.ball.set_process(False)
-		self.player_1.set_physics_process(False)
-		self.player_1.set_process(False)
+		self.player.set_physics_process(False)
+		self.player.set_process(False)
 		self.ui.play_game_over_anim()
 
 	def _on_anim_finished(self, anim_name):
 		if str(anim_name) == "game_over":
 			self.ball.reset()
-			self.player_1.panel.stop()
-			self.player_1.reset()
+			self.player.panel.stop()
+			self.player.reset()
 			self.score = 0
 		elif str(anim_name) == "prepare":
 			pass
 		elif str(anim_name) == "go":
 			self.ball.set_process(True)
-			self.player_1.set_physics_process(True)
-			self.player_1.set_process(True)
+			self.player.set_physics_process(True)
+			self.player.set_process(True)
 
 	def _on_bounce(self):
 		self.score += 1

@@ -21,6 +21,7 @@ class PlayerOneControl(Node2D):
 		self.panel = PANEL_SCENE.instance()
 		self.add_child(self.panel)
 		self.reset()
+		self.get_node("../Game").set("player", self)
 
 	def _physics_process(self, delta):
 		if Input.is_action_just_pressed("p1_move_up"):
