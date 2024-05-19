@@ -22,7 +22,6 @@ class DebugElem(HBoxContainer):
 		if self.path_to_node is None or self.property_to_track == "":
 			return
 
-		self.value_label = self.get_node("ValueLabel")
 		self.value_line_edit = self.get_node("ValueLineEdit")
 		self.slider = self.get_node("HSlider")
 		self.node_to_track = self.get_node(self.path_to_node)
@@ -32,10 +31,12 @@ class DebugElem(HBoxContainer):
 		self._set_initial_value()
 
 	def _set_initial_value(self):
-		if not hasattr(self, "node_to_track"):
+		if not hasattr(self.node_to_track, str(self.property_to_track)):
 			return
 
 		value = self.node_to_track.get(self.property_to_track)
+		print("now i want to get")
+		print(self.node_to_track.get(self.property_to_track))
 
 		if isinstance(value, float):
 			self.value_line_edit.text = ("%.2f" % value)
@@ -48,5 +49,5 @@ class DebugElem(HBoxContainer):
 
 	def _on_value_changed(self, value):
 	 self.node_to_track.set(self.property_to_track, str(self.slider.value))
-	 self.slider.value = value
-	 self.value_line_edit.value = value
+	 self.slider.value = float(str(value))
+	 self.value_line_edit.text = str(value)

@@ -214,20 +214,29 @@ margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="DebugElem" parent="UI_Layer/DebugPanel/VBoxContainer" instance=ExtResource( 6 )]
+[node name="GameSpeed" parent="UI_Layer/DebugPanel/VBoxContainer" instance=ExtResource( 6 )]
 margin_bottom = 24.0
-property_to_track = "game_speed"
 value_name = "Game:speed"
+property_to_track = "game_speed"
 path_to_node = NodePath("../../../..")
 
 [node name="GameScore" parent="UI_Layer/DebugPanel/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 28.0
 margin_bottom = 52.0
+value_name = "Game:score"
+property_to_track = "score"
+path_to_node = NodePath("../../../..")
 
 [node name="BallSpeed" parent="UI_Layer/DebugPanel/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 56.0
 margin_bottom = 80.0
+value_name = "Ball:Speed"
+property_to_track = "speed"
+path_to_node = NodePath("../../../../Ball")
 
 [node name="BallAccelFactor" parent="UI_Layer/DebugPanel/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 84.0
 margin_bottom = 108.0
+value_name = "Ball:acceleration_factor"
+property_to_track = "acceleration_factor"
+path_to_node = NodePath("../../../../Ball")
