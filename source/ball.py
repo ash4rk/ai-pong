@@ -31,7 +31,8 @@ class Ball(KinematicBody2D):
 		self.start_pos = self.global_position
 		self.acceleration_factor = DEFAULT_ACCELERATION_FACTOR
 		self.reset()
-		self.get_node("../Game").set("ball", self)
+		self.game = self.get_node("../Game")
+		self.game.ball = self
 
 	def reset(self):
 		self.global_position = self.start_pos
@@ -39,7 +40,7 @@ class Ball(KinematicBody2D):
 		self.speed = START_SPEED
 
 	def _process(self, delta):
-		velocity = self.direction * self.speed
+		velocity = self.direction * self.speed * self.game.game_speed
 		collision = self.move_and_collide(velocity)
 		if collision:
 			reflection = self.direction - Vector2(2.0, 2.0) * self.direction.dot(collision.normal) * collision.normal

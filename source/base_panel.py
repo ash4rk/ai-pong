@@ -22,10 +22,10 @@ class BasePanel(StaticBody2D):
 		self._height = value
 
 	def move_up(self):
-		self.direction = -Vector2(0.0, self._speed)
+		self.direction = -Vector2(0.0, self._speed * self.game.game_speed)
 
 	def move_down(self):
-		self.direction = +Vector2(0.0, self._speed)
+		self.direction = +Vector2(0.0, self._speed * self.game.game_speed)
 
 	def stop(self):
 		self.direction = Vector2(0.0, 0.0)
@@ -33,6 +33,7 @@ class BasePanel(StaticBody2D):
 	def _ready(self):
 		self._speed = self.speed
 		self.direction = Vector2(0.0, 0.0)
+		self.game = self.get_node("../../Game")
 
 	def _physics_process(self, delta):
 		self.position += self.direction * delta

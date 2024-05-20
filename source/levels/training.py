@@ -16,15 +16,16 @@ class Training(Node):
 		if hasattr(self, "ui"):
 			self.ui.update(value)
 
+	@export(float)
 	@property
 	def game_speed(self):
 		return self._game_speed
 
 	@game_speed.setter
 	def game_speed(self, value):
-		print("game_speed changed!")
 		self._game_speed = float(str(value))
 
+	@export(Node)
 	@property
 	def player(self):
 		return self._player
@@ -35,6 +36,7 @@ class Training(Node):
 		value.panel.connect("bounce", self, "_on_bounce")
 		self._player = value
 
+	@export(Node)
 	@property
 	def ball(self):
 		return self._ball
@@ -44,6 +46,7 @@ class Training(Node):
 		print("ball changed!")
 		self._ball = value
 
+	@export(Node)
 	@property
 	def ui(self):
 		return self._ui
@@ -51,7 +54,7 @@ class Training(Node):
 	@ui.setter
 	def ui(self, value):
 		print("ui changed!")
-		value.get("anim_player").connect("animation_finished", self, "_on_anim_finished")
+		value.anim_player.connect("animation_finished", self, "_on_anim_finished")
 		self._ui = value
 		self.score = 0
 
