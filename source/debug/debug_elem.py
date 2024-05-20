@@ -1,7 +1,7 @@
 from godot import exposed, export, HBoxContainer, Node, signal, NodePath
 import time
 
-@exposed(tool=True)
+@exposed(tool=False)
 class DebugElem(HBoxContainer):
 	value_changed = signal()
 

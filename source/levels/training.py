@@ -5,6 +5,8 @@ INIT_GAME_SPEED = 1.0
 
 @exposed
 class Training(Node):
+	game_started = signal()
+	game_over = signal()
 
 	@property
 	def score(self):
@@ -34,6 +36,7 @@ class Training(Node):
 	def player(self, value):
 		print("player changed!")
 		value.panel.connect("bounce", self, "_on_bounce")
+		value.panel.set_physics_process(False)
 		self._player = value
 
 	@export(Node)
@@ -44,6 +47,7 @@ class Training(Node):
 	@ball.setter
 	def ball(self, value):
 		print("ball changed!")
+		value.set_process(False)
 		self._ball = value
 
 	@export(Node)
@@ -63,9 +67,9 @@ class Training(Node):
 		self.game_speed = INIT_GAME_SPEED
 
 	def on_goal(self):
+		self.call("emit_signal", "game_over", self.score)
 		self.ball.set_process(False)
-		self.player.set_physics_process(False)
-		self.player.set_process(False)
+		self.player.panel.set_physics_process(False)
 		self.ui.play_game_over_anim()
 
 	def _on_anim_finished(self, anim_name):
@@ -77,9 +81,9 @@ class Training(Node):
 		elif str(anim_name) == "prepare":
 			pass
 		elif str(anim_name) == "go":
+			self.call("emit_signal", "game_started")
 			self.ball.set_process(True)
-			self.player.set_physics_process(True)
-			self.player.set_process(True)
+			self.player.panel.set_physics_process(True)
 
 	def _on_bounce(self):
 		self.score += 1

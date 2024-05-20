@@ -1,7 +1,7 @@
 from godot import exposed, export, HBoxContainer, Node, signal, NodePath
 import time
 
-@exposed(tool=True)
+@exposed(tool=False)
 class DebugElem(HBoxContainer):
 	value_changed = signal()
 
@@ -35,9 +35,6 @@ class DebugElem(HBoxContainer):
 			return
 
 		value = self.node_to_track.get(self.property_to_track)
-		print("now i want to get")
-		print(self.node_to_track.get(self.property_to_track))
-
 		if isinstance(value, float):
 			self.value_line_edit.text = ("%.2f" % value)
 		elif isinstance(value, int):

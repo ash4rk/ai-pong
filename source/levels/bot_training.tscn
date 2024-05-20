@@ -122,7 +122,6 @@ position = Vector2( 82, 294 )
 script = ExtResource( 5 )
 
 [node name="Panel" parent="Player" instance=ExtResource( 8 )]
-height = null
 
 [node name="Boundaries" type="Node2D" parent="."]
 
@@ -180,7 +179,6 @@ align = 1
 valign = 1
 
 [node name="GameOverLabel" type="Label" parent="UI_Layer"]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -30.0
@@ -189,13 +187,14 @@ margin_right = 47.0
 margin_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 3, 3 )
+rect_scale = Vector2( 5, 5 )
 rect_pivot_offset = Vector2( 40, 7 )
-text = "1"
+text = "Go!"
 align = 1
 valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI_Layer"]
+autoplay = "go"
 anims/game_over = SubResource( 4 )
 anims/go = SubResource( 5 )
 anims/prepare = SubResource( 6 )
@@ -206,7 +205,7 @@ anims/prepare = SubResource( 6 )
 text = "Panel:height"
 
 [node name="ValueLineEdit" parent="UI_Layer/DebugPanel/VBoxContainer/PanelHeight" index="1"]
-text = "64.0"
+text = "64.00"
 
 [node name="HSlider" parent="UI_Layer/DebugPanel/VBoxContainer/PanelHeight" index="2"]
 min_value = 32.0

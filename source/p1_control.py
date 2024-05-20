@@ -18,6 +18,8 @@ class PlayerOneControl(Node2D):
 		self.panel = self.get_node("./Panel")
 		self.reset()
 		self.get_node("../Game").player = self
+		self.get_node("../Game").connect("game_started", self, "_on_game_started")
+		self.get_node("../Game").connect("game_over", self, "_on_game_over")
 
 	def _physics_process(self, delta):
 		if Input.is_action_just_pressed("p1_move_up"):
@@ -31,3 +33,10 @@ class PlayerOneControl(Node2D):
 
 	def reset(self):
 		self.panel.global_position = self.global_position
+
+
+	def _on_game_started(self):
+		pass
+
+	def _on_game_over(self, score):
+		pass
