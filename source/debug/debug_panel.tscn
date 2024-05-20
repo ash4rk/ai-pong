@@ -1,5 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://source/debug/debug_elem.py" type="Script" id=1]
+[ext_resource path="res://source/debug/debug_slider_elem.py" type="Script" id=2]
 [ext_resource path="res://source/debug/debug_slider_elem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/debug/debug_elem.tscn" type="PackedScene" id=4]
 
@@ -20,29 +22,55 @@ margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="GameSpeed" parent="VBoxContainer" instance=ExtResource( 3 )]
+[node name="GameSpeed" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 386.0
 margin_bottom = 24.0
-value_name = "Game:speed"
+script = ExtResource( 2 )
+path_to_node = NodePath("../../../../Game")
 property_to_track = "game_speed"
-path_to_node = NodePath("../../../../Game")
+value_name = "Game:speed"
 
-[node name="GameScore" parent="VBoxContainer" instance=ExtResource( 4 )]
+[node name="GameScore" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 28.0
+margin_right = 386.0
 margin_bottom = 52.0
-value_name = "Game:score"
-property_to_track = "score"
+script = ExtResource( 1 )
 path_to_node = NodePath("../../../../Game")
+property_to_track = "score"
+value_name = "Game:score"
 
-[node name="BallSpeed" parent="VBoxContainer" instance=ExtResource( 4 )]
+[node name="BallSpeed" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 56.0
+margin_right = 386.0
 margin_bottom = 80.0
-value_name = "Ball:Speed"
+script = ExtResource( 1 )
+path_to_node = NodePath("../../../../Ball")
 property_to_track = "speed"
-path_to_node = NodePath("../../../../Ball")
+value_name = "Ball:speed"
 
-[node name="BallAccelFactor" parent="VBoxContainer" instance=ExtResource( 4 )]
+[node name="BallAccelFactor" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 84.0
+margin_right = 386.0
 margin_bottom = 108.0
-value_name = "Ball:acceleration_factor"
-property_to_track = "acceleration_factor"
+script = ExtResource( 1 )
 path_to_node = NodePath("../../../../Ball")
+property_to_track = "acceleration_factor"
+value_name = "Ball:acceleration_factor"
+
+[node name="PanelHeight" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 112.0
+margin_right = 386.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+path_to_node = NodePath("../../../../Player/Panel")
+property_to_track = "height"
+value_name = "Panel:height"
+
+[node name="PanelSpeed" type="HBoxContainer" parent="VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 140.0
+margin_right = 386.0
+margin_bottom = 164.0
+script = ExtResource( 1 )
+path_to_node = NodePath("../../../../Player/Panel")
+property_to_track = "speed"
+value_name = "Panel:speed"

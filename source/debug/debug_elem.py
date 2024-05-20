@@ -15,7 +15,7 @@ class DebugElem(HBoxContainer):
 
 	@value_name.setter
 	def value_name(self, value):
-		self.get_node("NameLabel").text = value
+		self.get_node("NameLabel").text = str(value)
 		self._value_name = value
 
 	def _ready(self):
@@ -46,4 +46,4 @@ class DebugElem(HBoxContainer):
 
 
 	def _on_change_btn_pressed(self):
-		 self.node_to_track.set(self.property_to_track, str(self.value_text_edit.text))
+		 self.node_to_track.set(self.property_to_track, float(str(self.value_text_edit.text)))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/gates.py" type="Script" id=1]
 [ext_resource path="res://source/ball.py" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://bot/bot.py" type="Script" id=5]
 [ext_resource path="res://source/debug/debug_panel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://source/base_panel.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30, 300 )
@@ -120,6 +121,9 @@ script = ExtResource( 3 )
 position = Vector2( 82, 294 )
 script = ExtResource( 5 )
 
+[node name="Panel" parent="Player" instance=ExtResource( 8 )]
+height = null
+
 [node name="Boundaries" type="Node2D" parent="."]
 
 [node name="Right" type="StaticBody2D" parent="Boundaries"]
@@ -197,3 +201,17 @@ anims/go = SubResource( 5 )
 anims/prepare = SubResource( 6 )
 
 [node name="DebugPanel" parent="UI_Layer" instance=ExtResource( 6 )]
+
+[node name="NameLabel" parent="UI_Layer/DebugPanel/VBoxContainer/PanelHeight" index="0"]
+text = "Panel:height"
+
+[node name="ValueLineEdit" parent="UI_Layer/DebugPanel/VBoxContainer/PanelHeight" index="1"]
+text = "64.0"
+
+[node name="HSlider" parent="UI_Layer/DebugPanel/VBoxContainer/PanelHeight" index="2"]
+min_value = 32.0
+max_value = 128.0
+value = 64.0
+
+[editable path="UI_Layer/DebugPanel"]
+[editable path="UI_Layer/DebugPanel/VBoxContainer/PanelHeight"]

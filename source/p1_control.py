@@ -1,8 +1,5 @@
 from godot import Input, Node2D, ResourceLoader, export, exposed
 
-PANEL_SCENE = ResourceLoader.load("res://source/base_panel.tscn")
-
-
 @exposed
 class PlayerOneControl(Node2D):
 	def __init__(self, panel):
@@ -18,8 +15,7 @@ class PlayerOneControl(Node2D):
 		self._panel = value
 
 	def _ready(self):
-		self.panel = PANEL_SCENE.instance()
-		self.add_child(self.panel)
+		self.panel = self.get_node("./Panel")
 		self.reset()
 		self.get_node("../Game").player = self
 

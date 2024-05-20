@@ -48,6 +48,6 @@ class DebugElem(HBoxContainer):
 			# print("unhandled type for %s, value: %s with type: %s" % (self.name, value, type(value)))
 
 	def _on_value_changed(self, value):
-	 self.node_to_track.set(self.property_to_track, str(self.slider.value))
+	 self.node_to_track.set(self.property_to_track, float(self.slider.value))
 	 self.slider.value = float(str(value))
 	 self.value_line_edit.text = str(value)

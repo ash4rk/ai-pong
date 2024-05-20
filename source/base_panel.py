@@ -2,11 +2,12 @@ from godot import exposed, export, Vector2, Input, StaticBody2D, signal
 
 BASE_HEIGHT = 32.0
 SCREEN_SIZE = Vector2(1024, 600)
+DEFAULT_SPEED = 600.0
 
 @exposed
 class BasePanel(StaticBody2D):
 
-	speed = export(float, default=600.0)
+	speed = export(float, default=DEFAULT_SPEED)
 	bounce = signal()
 
 	@export(float)
@@ -22,16 +23,15 @@ class BasePanel(StaticBody2D):
 		self._height = value
 
 	def move_up(self):
-		self.direction = -Vector2(0.0, self._speed * self.game.game_speed)
+		self.direction = -Vector2(0.0, self.speed * self.game.game_speed)
 
 	def move_down(self):
-		self.direction = +Vector2(0.0, self._speed * self.game.game_speed)
+		self.direction = +Vector2(0.0, self.speed * self.game.game_speed)
 
 	def stop(self):
 		self.direction = Vector2(0.0, 0.0)
 
 	def _ready(self):
-		self._speed = self.speed
 		self.direction = Vector2(0.0, 0.0)
 		self.game = self.get_node("../../Game")
 
