@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://source/debug/debug_elem.py" type="Script" id=1]
-[ext_resource path="res://source/debug/debug_slider_elem.py" type="Script" id=2]
-[ext_resource path="res://source/debug/debug_slider_elem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/debug/debug_elem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/debug/debug_elem.py" type="Script" id=1]
+[ext_resource path="res://src/debug/debug_slider_elem.py" type="Script" id=2]
+[ext_resource path="res://src/debug/debug_slider_elem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/debug/debug_elem.tscn" type="PackedScene" id=4]
 
 [node name="DebugPanel" type="Control"]
 margin_right = 396.0
