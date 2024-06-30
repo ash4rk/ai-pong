@@ -1,6 +1,6 @@
 from godot import exposed
 
-from source.p1_control import PlayerOneControl
+from src.p1_control import PlayerOneControl
 
 
 @exposed
